@@ -1,0 +1,19 @@
+server:
+  port: 9001
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: blog-server_route
+          uri: lb://blog-server
+          predicates:
+            - Path=/server/**
+          #filters:
+            #- RewritePath=/api/(?<segment>.*),/$\{segment}
+  application:
+    name: blog-gateway
+
